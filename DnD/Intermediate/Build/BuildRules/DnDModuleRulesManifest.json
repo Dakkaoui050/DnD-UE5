@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\Driss\\Documents\\GitHub\\DnD-UE5\\DnD\\Source\\DnD\\DnD.Build.cs",
+		"C:\\Users\\Driss\\Documents\\GitHub\\DnD-UE5\\DnD\\Source\\DnD.Target.cs",
+		"C:\\Users\\Driss\\Documents\\GitHub\\DnD-UE5\\DnD\\Source\\DnDEditor.Target.cs"
+	],
+	"EngineVersion": "5.3.2"
+}
