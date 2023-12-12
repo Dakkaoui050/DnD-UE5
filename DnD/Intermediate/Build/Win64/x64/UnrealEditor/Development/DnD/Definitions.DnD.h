@@ -1,4 +1,4 @@
-#include "C:/Users/dakka/OneDrive/Documenten/GitHub/DnD-UE5/DnD/Intermediate/Build/Win64/x64/DnDEditor/Development/UnrealEd/SharedDefinitions.UnrealEd.Cpp20.h"
+#include "C:/Users/Driss/Documents/GitHub/DnD-UE5/DnD/Intermediate/Build/Win64/x64/DnDEditor/Development/UnrealEd/SharedDefinitions.UnrealEd.Cpp20.h"
 #undef UE_IS_ENGINE_MODULE
 #undef DEPRECATED_FORGAME
 #define DEPRECATED_FORGAME DEPRECATED
@@ -22,6 +22,7 @@
 #define DEPRECATED_FORGAME DEPRECATED
 #define UE_DEPRECATED_FORGAME UE_DEPRECATED
 #define DND_API DLLEXPORT
+#define PROCEDURALMESHCOMPONENT_API DLLIMPORT
 #define WITH_GAMEPLAY_DEBUGGER_CORE 1
 #define WITH_GAMEPLAY_DEBUGGER 1
 #define WITH_GAMEPLAY_DEBUGGER_MENU 1

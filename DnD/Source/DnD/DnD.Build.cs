@@ -15,6 +15,8 @@ public class DnD : ModuleRules
             "Engine",
             "Landscape",
             "InputCore",
+            "ProceduralMeshComponent",
+            "UMG",
             "NavigationSystem",
             "AIModule",
             "Niagara",
