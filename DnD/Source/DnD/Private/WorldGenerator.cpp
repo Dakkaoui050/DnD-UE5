@@ -25,9 +25,9 @@ void AWorldGenerator::GenerateWorld()
         // Define vertices for a square (size 100x100)
         TArray<FVector> Vertices;
         Vertices.Add(FVector(0, 0, 0)); // Bottom Left
-        Vertices.Add(FVector(0, 1000000 * ScaleFactor, 0)); // Bottom Right
-        Vertices.Add(FVector(1000000 * ScaleFactor, 0, 0)); // Top Left
-        Vertices.Add(FVector(1000000 * ScaleFactor, 1000000 * ScaleFactor, 0)); // Top Right
+        Vertices.Add(FVector(0, 100000 * ScaleFactor, 0)); // Bottom Right
+        Vertices.Add(FVector(100000 * ScaleFactor, 0, 0)); // Top Left
+        Vertices.Add(FVector(100000 * ScaleFactor, 100000 * ScaleFactor, 0)); // Top Right
 
         // Define triangles (the order of vertices matters for rendering)
         TArray<int32> Triangles;
@@ -68,37 +68,57 @@ void AWorldGenerator::GenerateWorld()
 }
 void AWorldGenerator::GenerateHeightmapTerrain()
 {
-    // Assuming you have a method to generate or load a heightmap
-    TArray<float> Heightmap; // = GenerateHeightmap(); // Define or call this method
 
-    // Use HeightmapSize instead of MapSize
-    int32 HeightmapSize = FMath::Sqrt(static_cast<float>(Heightmap.Num()));
+    int32 Size = 10000; // Define the size of your heightmap
+    TArray<float> Heightmap;
+    Heightmap.SetNum(Size * Size);
+
+    float TerrainScale = 10.0f; // Scale for X and Y coordinates
+    float HeightScale = 50.0f;  // Scale for Z coordinate (height)
+    float NoiseScale = 0.05f;    // Adjust this for more or less frequency
+    float HeightFactor = 50.0f; // Adjust this for more or less height
+
+    for (int32 i = 0; i < Heightmap.Num(); ++i)
+    {
+        if (i % Size == 0)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("New Row"));
+        }
+        UE_LOG(LogTemp, Warning, TEXT("Heightmap Value: %f"), Heightmap[i]);
+    }
+    // Generate heightmap values using noise
+    for (int32 y = 0; y < Size; ++y)
+    {
+        for (int32 x = 0; x < Size; ++x)
+        {
+            float NoiseValue = FMath::PerlinNoise2D(FVector2D(x * NoiseScale, y * NoiseScale));
+            Heightmap[y * Size + x] = NoiseValue * HeightFactor;
+        }
+    }
+
     TArray<FVector> Vertices;
     TArray<int32> Triangles;
     TArray<FVector> Normals;
     TArray<FVector2D> UVs;
 
     // Populate vertices based on heightmap
-    float TerrainScale = 10.0f;
-
-    // Populate vertices based on heightmap and scale them
-    for (int32 y = 0; y < HeightmapSize; ++y)
+    for (int32 y = 0; y < Size; ++y)
     {
-        for (int32 x = 0; x < HeightmapSize; ++x)
+        for (int32 x = 0; x < Size; ++x)
         {
-            float Height = Heightmap[y * HeightmapSize + x];
-            Vertices.Add(FVector(x * 1000 * TerrainScale, y * 1000 * TerrainScale, Height));
+            float Height = Heightmap[y * Size + x] * HeightScale;
+            Vertices.Add(FVector(x * TerrainScale, y * TerrainScale, Height));
         }
     }
 
     // Generate triangles
-    for (int32 y = 0; y < HeightmapSize - 1; ++y)
+    for (int32 y = 0; y < Size - 1; ++y)
     {
-        for (int32 x = 0; x < HeightmapSize - 1; ++x)
+        for (int32 x = 0; x < Size - 1; ++x)
         {
-            int32 topLeft = y * HeightmapSize + x;
+            int32 topLeft = y * Size + x;
             int32 topRight = topLeft + 1;
-            int32 bottomLeft = topLeft + HeightmapSize;
+            int32 bottomLeft = topLeft + Size;
             int32 bottomRight = bottomLeft + 1;
 
             // Triangle 1
@@ -114,11 +134,11 @@ void AWorldGenerator::GenerateHeightmapTerrain()
     }
 
     // Generate UVs
-    for (int32 y = 0; y < HeightmapSize; ++y)
+    for (int32 y = 0; y < Size; ++y)
     {
-        for (int32 x = 0; x < HeightmapSize; ++x)
+        for (int32 x = 0; x < Size; ++x)
         {
-            UVs.Add(FVector2D(static_cast<float>(x) / (HeightmapSize - 1), static_cast<float>(y) / (HeightmapSize - 1)));
+            UVs.Add(FVector2D(static_cast<float>(x) / (Size - 1), static_cast<float>(y) / (Size - 1)));
         }
     }
 
@@ -143,8 +163,7 @@ void AWorldGenerator::GenerateHeightmapTerrain()
     {
         Normal.Normalize();
     }
-    // Generate triangles, UVs, Normals based on vertices
-    // ...
+    
 
     WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), TArray<FProcMeshTangent>(), true);
 }
@@ -155,6 +174,7 @@ void AWorldGenerator::BeginPlay()
 	Super::BeginPlay();
 
     GenerateWorld();
+    GenerateHeightmapTerrain();
 }
 
 // Called every frame

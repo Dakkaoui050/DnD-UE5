@@ -41,7 +41,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-public:
-	/*float ScaleFactor;
-	float TerrainScale;*/
+	
 };
