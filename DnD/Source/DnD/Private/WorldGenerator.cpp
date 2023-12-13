@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 
+
 // Sets default values
 AWorldGenerator::AWorldGenerator()
 {
@@ -20,12 +21,13 @@ void AWorldGenerator::GenerateWorld()
 {
     if (WorldMesh)
     {
+        float ScaleFactor = 10.0f;
         // Define vertices for a square (size 100x100)
         TArray<FVector> Vertices;
         Vertices.Add(FVector(0, 0, 0)); // Bottom Left
-        Vertices.Add(FVector(0, 100, 0)); // Bottom Right
-        Vertices.Add(FVector(100, 0, 0)); // Top Left
-        Vertices.Add(FVector(100, 100, 0)); // Top Right
+        Vertices.Add(FVector(0, 1000000 * ScaleFactor, 0)); // Bottom Right
+        Vertices.Add(FVector(1000000 * ScaleFactor, 0, 0)); // Top Left
+        Vertices.Add(FVector(1000000 * ScaleFactor, 1000000 * ScaleFactor, 0)); // Top Right
 
         // Define triangles (the order of vertices matters for rendering)
         TArray<int32> Triangles;
@@ -63,6 +65,88 @@ void AWorldGenerator::GenerateWorld()
         // Update collision if necessary
         WorldMesh->ContainsPhysicsTriMeshData(true);
     }
+}
+void AWorldGenerator::GenerateHeightmapTerrain()
+{
+    // Assuming you have a method to generate or load a heightmap
+    TArray<float> Heightmap; // = GenerateHeightmap(); // Define or call this method
+
+    // Use HeightmapSize instead of MapSize
+    int32 HeightmapSize = FMath::Sqrt(static_cast<float>(Heightmap.Num()));
+    TArray<FVector> Vertices;
+    TArray<int32> Triangles;
+    TArray<FVector> Normals;
+    TArray<FVector2D> UVs;
+
+    // Populate vertices based on heightmap
+    float TerrainScale = 10.0f;
+
+    // Populate vertices based on heightmap and scale them
+    for (int32 y = 0; y < HeightmapSize; ++y)
+    {
+        for (int32 x = 0; x < HeightmapSize; ++x)
+        {
+            float Height = Heightmap[y * HeightmapSize + x];
+            Vertices.Add(FVector(x * 1000 * TerrainScale, y * 1000 * TerrainScale, Height));
+        }
+    }
+
+    // Generate triangles
+    for (int32 y = 0; y < HeightmapSize - 1; ++y)
+    {
+        for (int32 x = 0; x < HeightmapSize - 1; ++x)
+        {
+            int32 topLeft = y * HeightmapSize + x;
+            int32 topRight = topLeft + 1;
+            int32 bottomLeft = topLeft + HeightmapSize;
+            int32 bottomRight = bottomLeft + 1;
+
+            // Triangle 1
+            Triangles.Add(topLeft);
+            Triangles.Add(bottomLeft);
+            Triangles.Add(topRight);
+
+            // Triangle 2
+            Triangles.Add(topRight);
+            Triangles.Add(bottomLeft);
+            Triangles.Add(bottomRight);
+        }
+    }
+
+    // Generate UVs
+    for (int32 y = 0; y < HeightmapSize; ++y)
+    {
+        for (int32 x = 0; x < HeightmapSize; ++x)
+        {
+            UVs.Add(FVector2D(static_cast<float>(x) / (HeightmapSize - 1), static_cast<float>(y) / (HeightmapSize - 1)));
+        }
+    }
+
+    Normals.Init(FVector(0, 0, 1), Vertices.Num());
+
+    for (int32 i = 0; i < Triangles.Num(); i += 3)
+    {
+        FVector Vertex1 = Vertices[Triangles[i]];
+        FVector Vertex2 = Vertices[Triangles[i + 1]];
+        FVector Vertex3 = Vertices[Triangles[i + 2]];
+
+        FVector Edge1 = Vertex2 - Vertex1;
+        FVector Edge2 = Vertex3 - Vertex1;
+        FVector TriangleNormal = FVector::CrossProduct(Edge1, Edge2).GetSafeNormal();
+
+        Normals[Triangles[i]] += TriangleNormal;
+        Normals[Triangles[i + 1]] += TriangleNormal;
+        Normals[Triangles[i + 2]] += TriangleNormal;
+    }
+
+    for (FVector& Normal : Normals)
+    {
+        Normal.Normalize();
+    }
+    // Generate triangles, UVs, Normals based on vertices
+    // ...
+
+    WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), TArray<FProcMeshTangent>(), true);
 }
 
 // Called when the game starts or when spawned

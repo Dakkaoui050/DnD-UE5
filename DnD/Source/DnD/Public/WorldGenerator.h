@@ -23,13 +23,17 @@ public:
 
 	// Function to generate the world based on the player's input
 	void GenerateWorld();
-
+	void GenerateHeightmapTerrain();
+  
+	
 private:
+	
 
 	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UUserWidget> InputWidgetClass;
 
 	UProceduralMeshComponent* WorldMesh;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -37,5 +41,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+public:
+	/*float ScaleFactor;
+	float TerrainScale;*/
 };
