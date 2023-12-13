@@ -25,9 +25,9 @@ void AWorldGenerator::GenerateWorld()
         // Define vertices for a square (size 100x100)
         TArray<FVector> Vertices;
         Vertices.Add(FVector(0, 0, 0)); // Bottom Left
-        Vertices.Add(FVector(0, 100000 * ScaleFactor, 0)); // Bottom Right
-        Vertices.Add(FVector(100000 * ScaleFactor, 0, 0)); // Top Left
-        Vertices.Add(FVector(100000 * ScaleFactor, 100000 * ScaleFactor, 0)); // Top Right
+        Vertices.Add(FVector(0, 1000000 * ScaleFactor, 0)); // Bottom Right
+        Vertices.Add(FVector(1000000 * ScaleFactor, 0, 0)); // Top Left
+        Vertices.Add(FVector(1000000 * ScaleFactor, 1000000 * ScaleFactor, 0)); // Top Right
 
         // Define triangles (the order of vertices matters for rendering)
         TArray<int32> Triangles;
@@ -69,14 +69,14 @@ void AWorldGenerator::GenerateWorld()
 void AWorldGenerator::GenerateHeightmapTerrain()
 {
 
-    int32 Size = 10000; // Define the size of your heightmap
+    int32 Size = 1000; // Define the size of your heightmap
     TArray<float> Heightmap;
     Heightmap.SetNum(Size * Size);
 
-    float TerrainScale = 10.0f; // Scale for X and Y coordinates
+    float TerrainScale = 1000.0f; // Scale for X and Y coordinates
     float HeightScale = 50.0f;  // Scale for Z coordinate (height)
-    float NoiseScale = 0.05f;    // Adjust this for more or less frequency
-    float HeightFactor = 50.0f; // Adjust this for more or less height
+    float NoiseScale = 0.1f;    // Adjust this for more or less frequency
+    float HeightFactor = 10.0f; // Adjust this for more or less height
 
     for (int32 i = 0; i < Heightmap.Num(); ++i)
     {
