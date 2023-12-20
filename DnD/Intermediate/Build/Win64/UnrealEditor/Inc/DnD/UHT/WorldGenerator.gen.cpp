@@ -31,13 +31,29 @@ void EmptyLinkFunctionForGeneratedCodeWorldGenerator() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InputWidgetClass_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_InputWidgetClass;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Input_MetaData[];
 #endif
 		static const UECodeGen_Private::FStrPropertyParams NewProp_Input;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_InputWidgetClass_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeightScale_MetaData[];
 #endif
-		static const UECodeGen_Private::FClassPropertyParams NewProp_InputWidgetClass;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_HeightScale;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_TerrainScale_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_TerrainScale;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NoiseScale_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_NoiseScale;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeightFactor_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_HeightFactor;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -54,28 +70,54 @@ void EmptyLinkFunctionForGeneratedCodeWorldGenerator() {}
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input_MetaData[] = {
-		{ "Category", "World Generation" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// UProperty for storing the player's input\n" },
-#endif
-		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "UProperty for storing the player's input" },
-#endif
-	};
-#endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input = { "Input", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, Input), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_InputWidgetClass_MetaData[] = {
 		{ "Category", "UI" },
 		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
 	};
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_InputWidgetClass = { "InputWidgetClass", nullptr, (EPropertyFlags)0x0044000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, InputWidgetClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_InputWidgetClass_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_InputWidgetClass_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input_MetaData[] = {
+		{ "Category", "World Generation" },
+		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input = { "Input", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, Input), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightScale_MetaData[] = {
+		{ "Category", "World" },
+		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightScale = { "HeightScale", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, HeightScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightScale_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightScale_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_TerrainScale_MetaData[] = {
+		{ "Category", "World" },
+		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_TerrainScale = { "TerrainScale", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, TerrainScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_TerrainScale_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_TerrainScale_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_NoiseScale_MetaData[] = {
+		{ "Category", "World" },
+		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_NoiseScale = { "NoiseScale", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, NoiseScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_NoiseScale_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_NoiseScale_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightFactor_MetaData[] = {
+		{ "Category", "World" },
+		{ "ModuleRelativePath", "Public/WorldGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightFactor = { "HeightFactor", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWorldGenerator, HeightFactor), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightFactor_MetaData), Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightFactor_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AWorldGenerator_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_InputWidgetClass,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_Input,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_TerrainScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_NoiseScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWorldGenerator_Statics::NewProp_HeightFactor,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AWorldGenerator_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AWorldGenerator>::IsAbstract,
@@ -115,9 +157,9 @@ void EmptyLinkFunctionForGeneratedCodeWorldGenerator() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_dakka_OneDrive_Documenten_GitHub_DnD_UE5_DnD_Source_DnD_Public_WorldGenerator_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AWorldGenerator, AWorldGenerator::StaticClass, TEXT("AWorldGenerator"), &Z_Registration_Info_UClass_AWorldGenerator, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWorldGenerator), 1511935711U) },
+		{ Z_Construct_UClass_AWorldGenerator, AWorldGenerator::StaticClass, TEXT("AWorldGenerator"), &Z_Registration_Info_UClass_AWorldGenerator, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWorldGenerator), 1902462434U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_dakka_OneDrive_Documenten_GitHub_DnD_UE5_DnD_Source_DnD_Public_WorldGenerator_h_2551423222(TEXT("/Script/DnD"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_dakka_OneDrive_Documenten_GitHub_DnD_UE5_DnD_Source_DnD_Public_WorldGenerator_h_3093631859(TEXT("/Script/DnD"),
 		Z_CompiledInDeferFile_FID_Users_dakka_OneDrive_Documenten_GitHub_DnD_UE5_DnD_Source_DnD_Public_WorldGenerator_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_dakka_OneDrive_Documenten_GitHub_DnD_UE5_DnD_Source_DnD_Public_WorldGenerator_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

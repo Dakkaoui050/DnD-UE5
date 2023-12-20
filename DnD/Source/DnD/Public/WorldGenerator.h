@@ -18,13 +18,13 @@ public:
 	AWorldGenerator();
 
 	// UProperty for storing the player's input
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Generation")
-	FString Input;
+	
 
 	// Function to generate the world based on the player's input
 	void GenerateWorld();
 	void GenerateHeightmapTerrain();
-  
+	void ParseInputAndGenerateTerrain();
+	
 	
 private:
 	
@@ -41,5 +41,23 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World Generation")
+	FString Input;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World")
+	float HeightScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World")
+	float TerrainScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World")
+	float NoiseScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World")
+	float HeightFactor;
+
 };

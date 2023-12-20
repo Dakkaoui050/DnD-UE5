@@ -73,10 +73,10 @@ void AWorldGenerator::GenerateHeightmapTerrain()
     TArray<float> Heightmap;
     Heightmap.SetNum(Size * Size);
 
-    float TerrainScale = 1000.0f; // Scale for X and Y coordinates
-    float HeightScale = 50.0f;  // Scale for Z coordinate (height)
-    float NoiseScale = 0.1f;    // Adjust this for more or less frequency
-    float HeightFactor = 10.0f; // Adjust this for more or less height
+    TerrainScale = 1000.0f; // Scale for X and Y coordinates
+    HeightScale = 50.0f;  // Scale for Z coordinate (height)
+    NoiseScale = 0.1f;    // Adjust this for more or less frequency
+    HeightFactor = 10.0f; // Adjust this for more or less height
 
     for (int32 i = 0; i < Heightmap.Num(); ++i)
     {
@@ -167,6 +167,28 @@ void AWorldGenerator::GenerateHeightmapTerrain()
 
     WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), TArray<FProcMeshTangent>(), true);
 }
+
+void AWorldGenerator::ParseInputAndGenerateTerrain()
+{
+    
+
+    if (Input.Equals("Low height mountains", ESearchCase::IgnoreCase))
+    {
+        HeightScale = 100.0f; // Lower height scale for low mountains
+    }
+    else if (Input.Equals("Medium height mountain", ESearchCase::IgnoreCase))
+    {
+        HeightScale = 200.0f; // Medium height scale for medium mountains
+    }
+    else if (Input.Equals("High height mountains", ESearchCase::IgnoreCase))
+    {
+        HeightScale = 300.0f; // Higher height scale for high mountains
+    }
+
+    // Now use this adjusted HeightScale in the terrain generation
+    GenerateHeightmapTerrain();
+}
+
 
 // Called when the game starts or when spawned
 void AWorldGenerator::BeginPlay()
