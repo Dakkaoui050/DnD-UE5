@@ -10,17 +10,18 @@ public class DnD : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[]
         {
+            "ProceduralMeshComponent",
             "Core",
             "CoreUObject",
             "Engine",
             "Landscape",
             "InputCore",
-            "ProceduralMeshComponent",
             "UMG",
             "NavigationSystem",
             "AIModule",
             "Niagara",
             "EnhancedInput"
         });
+
     }
 }

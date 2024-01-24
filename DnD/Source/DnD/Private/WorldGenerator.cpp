@@ -60,16 +60,20 @@ void AWorldGenerator::GenerateWorld()
         }
 
         // Create the mesh section
-        WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), Tangents, true);
+       
 
         // Update collision if necessary
         WorldMesh->ContainsPhysicsTriMeshData(true);
+        
+       
+         
+        
     }
     
 }
 void AWorldGenerator::GenerateHeightmapTerrain()
 {
-
+    
     int32 Size = 1000; // Define the size of your heightmap
     TArray<float> Heightmap;
     Heightmap.SetNum(Size * Size);
@@ -160,13 +164,13 @@ void AWorldGenerator::GenerateHeightmapTerrain()
         Normals[Triangles[i + 2]] += TriangleNormal;
     }
 
-    for (FVector& Normal : Normals)
+   /* for (FVector& Normal : Normals)
     {
         Normal.Normalize();
-    }
+    }*/
     
-
-    WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), TArray<FProcMeshTangent>(), true);
+    WorldMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), TArray<FVector2D>(), TArray<FColor>(), TArray<FProcMeshTangent>(), true);
+    //WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), TArray<FProcMeshTangent>(), true);
 }
 void AWorldGenerator::SpawnTreesAndBushes()
 {
@@ -194,7 +198,7 @@ void AWorldGenerator::SpawnTreesAndBushes()
 void AWorldGenerator::BeginPlay()
 {
 	Super::BeginPlay();
-
+    WorldMesh->SetMaterial(0, Material);
     GenerateWorld();
     GenerateHeightmapTerrain();
     SpawnTreesAndBushes();

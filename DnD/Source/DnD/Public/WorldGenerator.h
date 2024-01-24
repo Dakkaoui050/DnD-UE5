@@ -67,5 +67,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bushes")
 	int NumBushes;
 
+	UPROPERTY(EditAnywhere)
+	UMaterialInterface* Material;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FVector2D> UV0;
+
 	UStaticMesh* TreeMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, TEXT("DnD-UE5\\DnD\\Content\\CommonHazel\\Foliage\\SimpleWind")));
 };
