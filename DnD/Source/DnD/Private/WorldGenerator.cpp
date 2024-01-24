@@ -65,6 +65,7 @@ void AWorldGenerator::GenerateWorld()
         // Update collision if necessary
         WorldMesh->ContainsPhysicsTriMeshData(true);
     }
+    
 }
 void AWorldGenerator::GenerateHeightmapTerrain()
 {
@@ -167,26 +168,25 @@ void AWorldGenerator::GenerateHeightmapTerrain()
 
     WorldMesh->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), TArray<FProcMeshTangent>(), true);
 }
-
-void AWorldGenerator::ParseInputAndGenerateTerrain()
+void AWorldGenerator::SpawnTreesAndBushes()
 {
     
+     NumTrees = 100; 
+     NumBushes = 50; 
 
-    if (Input.Equals("Low height mountains", ESearchCase::IgnoreCase))
+    // Loop to spawn trees
+    for (int i = 0; i < NumTrees; ++i)
     {
-        HeightScale = 100.0f; // Lower height scale for low mountains
-    }
-    else if (Input.Equals("Medium height mountain", ESearchCase::IgnoreCase))
-    {
-        HeightScale = 200.0f; // Medium height scale for medium mountains
-    }
-    else if (Input.Equals("High height mountains", ESearchCase::IgnoreCase))
-    {
-        HeightScale = 300.0f; // Higher height scale for high mountains
+        //FVector Location = GenerateWorld(); // Determine location based on your terrain
+        // Spawn the tree using Unreal's spawning functions, using your tree asset
     }
 
-    // Now use this adjusted HeightScale in the terrain generation
-    GenerateHeightmapTerrain();
+    // Loop to spawn bushes
+    for (int i = 0; i < NumBushes; ++i)
+    {
+       // FVector Location = GenerateWorld(); 
+        // Spawn the bush
+    }
 }
 
 
@@ -197,6 +197,7 @@ void AWorldGenerator::BeginPlay()
 
     GenerateWorld();
     GenerateHeightmapTerrain();
+    SpawnTreesAndBushes();
 }
 
 // Called every frame

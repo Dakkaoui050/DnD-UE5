@@ -24,6 +24,7 @@ public:
 	void GenerateWorld();
 	void GenerateHeightmapTerrain();
 	void ParseInputAndGenerateTerrain();
+	void SpawnTreesAndBushes();
 	
 	
 private:
@@ -60,4 +61,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "World")
 	float HeightFactor;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trees")
+	int NumTrees;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bushes")
+	int NumBushes;
+
+	UStaticMesh* TreeMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, TEXT("DnD-UE5\\DnD\\Content\\CommonHazel\\Foliage\\SimpleWind")));
 };
